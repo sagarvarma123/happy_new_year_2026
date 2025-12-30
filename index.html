@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: radial-gradient(circle at top, #1a2a6c, #b21f1f, #fdbb2d);
+    color:white;
+    text-align:center;
+}
+
+/* Overlay */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+}
+
+.popup{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:20px;
+    padding:35px 25px;
+    width:90%;
+    max-width:420px;
+    box-shadow:0 0 30px rgba(255,215,0,0.6);
+}
+
+.popup h2{
+    color:#ffd700;
+    margin-bottom:15px;
+}
+
+.popup input{
+    width:90%;
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    outline:none;
+    font-size:16px;
+    text-align:center;
+}
+
+.popup button{
+    margin-top:18px;
+    padding:10px 30px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    background:linear-gradient(45deg,#ffd700,#ff9800);
+}
+
+.error{
+    margin-top:15px;
+    color:#ffb3b3;
+    line-height:1.8;
+}
+
+/* Main Card */
+.card{
+    display:none;
+    padding:50px 15px 40px;
+}
+
+.title{
+    font-size:46px;
+    font-weight:600;
+    color:#ffd700;
+    text-shadow:0 0 20px gold;
+}
+
+.sub{
+    margin-top:10px;
+    font-size:20px;
+}
+
+.clock, .countdown{
+    margin-top:15px;
+    font-size:18px;
+    color:#fff3b0;
+}
+
+/* Glass Box */
+.glass{
+    margin:30px auto 0;
+    max-width:700px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(10px);
+    border-radius:25px;
+    padding:30px 20px;
+}
+
+.shayari{
+    font-size:18px;
+    line-height:1.9;
+    margin-bottom:22px;
+}
+
+/* Footer */
+.footer{
+    margin-top:25px;
+    font-size:14px;
+    opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Name Check -->
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <h2>Please Enter Your Name</h2>
+        <input type="text" id="name" placeholder="Enter your name">
+        <br>
+        <button onclick="checkName()">Continue</button>
+        <div class="error" id="msg"></div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="card" id="card">
+    <div class="title">🎆 Happy New Year 2026 🎆</div>
+    <div class="sub" id="welcomeText"></div>
+    <div class="clock" id="clock"></div>
+    <div class="countdown" id="countdown"></div>
+
+    <div class="glass">
+        <div class="shayari">
+            ✨ नया साल नई शुरुआत लाए<br>
+            टूटे भरोसे को पीछे छोड़ जाए<br>
+            जो अपना नहीं था, वो दूर ही भला<br>
+            2026 दिल को सुकून दे जाए ✨
+        </div>
+
+        <div class="shayari">
+            🌟 झूठे वादों से अब कोई वास्ता नहीं<br>
+            अधूरी कहानियों का अब रास्ता नहीं<br>
+            सच्चे लोग, सच्ची मुस्कान के साथ<br>
+            नया साल हो, पुराना दर्द नहीं 🌟
+        </div>
+    </div>
+
+    <div class="footer">
+        Best Wishes for a Strong & Peaceful 2026 ✨
+    </div>
+</div>
+
+<script>
+function checkName(){
+    let rawName = document.getElementById("name").value;
+    let msg = document.getElementById("msg");
+
+    let name = rawName
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, " ");
+
+    let blockedNames = [
+        "nisha",
+        "nisha kumari",
+        "nishu",
+        "kumari nisha"
+    ];
+
+    if(name === ""){
+        msg.innerText = "Name is required.";
+        return;
+    }
+
+    if(blockedNames.includes(name)){
+        msg.innerHTML =
+        "STOP🚫 Your Name is Blocked in this site 🚫 Enter another name<br><br>" +
+"इस नाम से यह वेबसाइट नहीं खुलेगी।<br><br>" +
+"क्योंकि कुछ नाम सिर्फ यादें नहीं होते,<br>" +
+"वो सबक होते हैं।<br><br>" +
+"सबक इस बात का कि हर मुस्कान सच्ची नहीं होती,<br>" +
+"और हर अपना कहने वाला अपना नहीं होता।<br><br>" +
+"कृपया कोई और नाम लिखिए।";
+        return;
+    }
+
+    document.getElementById("overlay").style.display="none";
+    document.getElementById("card").style.display="block";
+    document.getElementById("welcomeText").innerText =
+        "Welcome " + rawName.trim() + " 🎉";
+}
+
+/* Date & Time */
+function updateClock(){
+    let d = new Date();
+    let date = d.toLocaleDateString("en-IN",{
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    });
+    let time = d.toLocaleTimeString("en-IN");
+    document.getElementById("clock").innerText = date + " | " + time;
+}
+
+/* Countdown */
+function updateCountdown(){
+    let now = new Date();
+    let newYear = new Date("January 1, 2026 00:00:00");
+    let diff = newYear - now;
+
+    if(diff <= 0){
+        document.getElementById("countdown").innerText =
+        "🎉 Happy New Year 2026! 🎉";
+        return;
+    }
+
+    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    let minutes = Math.floor((diff / (1000 * 60)) % 60);
+    let seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerText =
+    `⏳ Happy New Year 2026 is coming! Only ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left!`;
+}
+
+setInterval(updateClock,1000);
+setInterval(updateCountdown,1000);
+updateClock();
+updateCountdown();
+</script>
+
+</body>
+</html>
